@@ -1,0 +1,36 @@
+#app{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+h1{
+  text-align:center;
+}
+
+form{
+  margin-bottom:5%;
+  text-align:center;
+  
+}
+
+button, input{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#to-do-list{
+border:1px solid black;
+margin: auto;
+padding-right:10%;
+border-radius: 2%;
+width:67%;
+}
+
+#to-do-item{
+  display:flex;
+}
+
+#to-do-item > button{
+width:auto;
+height:1%;
+margin-left:1%;
+align-self: center;
+}
