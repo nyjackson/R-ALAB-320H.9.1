@@ -5,11 +5,11 @@ import initialState from "../data";
 function Form() {
   // const [toDo, dispatch] = useReducer(reducer, [])
   const [newToDo, setNewToDo] = useState("");
-  const [toDoList, setToDoList] = useState([{title: "Sample Entry"}]);
-
+  const [toDoList, setToDoList] = useState(initialState);
+// [{title: "Sample Entry"}]
 function handleNewEntry(e){
     const item = e.target.value !== "" ? e.target.value : null
-    setNewToDo({title: item})
+    setNewToDo({title: item, id: toDoList.length+1})
     console.log("new entry is",item)
 }
   function handleToDoAdd(e) {

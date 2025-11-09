@@ -1,8 +1,9 @@
 import ToDoItem from "./ToDoItem";
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 function ToDoList({ list, setList }) {
-  const toDos = list.map((i) => (
-    <ToDoItem key={i.id} task={i.title} list = {list} setList = {setList}>
+
+  const toDos = list.map((entry, i) => (
+    <ToDoItem key={entry.id || i} task={entry.title} list = {list} setList = {setList}>
       {i.title}
     </ToDoItem>
   ));
