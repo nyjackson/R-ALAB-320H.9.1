@@ -1,12 +1,17 @@
 import ToDoList from "./ToDoList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import initialState from "../data";
 
 function Form() {
   // const [toDo, dispatch] = useReducer(reducer, [])
   const [newToDo, setNewToDo] = useState("");
-  const [toDoList, setToDoList] = useState(initialState);
-// [{title: "Sample Entry"}]
+  const [toDoList, setToDoList] = useState([]);
+
+  useEffect(()=>{
+    setToDoList(initialState)
+  }, [])
+
+
 function handleNewEntry(e){
     const item = e.target.value !== "" ? e.target.value : null
     setNewToDo({title: item, id: toDoList.length+1})
@@ -15,8 +20,8 @@ function handleNewEntry(e){
   function handleToDoAdd(e) {
     e.preventDefault();
     console.log("In handleToDoAdd list:", newToDo)
-    //const item = e.target[0].value;
     setToDoList(e => [...e, newToDo]);
+    e.target[0].value = ""
     //console.log(item);
   }
 
