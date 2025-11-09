@@ -1,38 +1,44 @@
-import ToDoList from './ToDoList'
-import {useState} from 'react'
-import initialState from '../data'
+import ToDoList from "./ToDoList";
+import { useState } from "react";
+import initialState from "../data";
 
+function Form() {
+  // const [toDo, dispatch] = useReducer(reducer, [])
+  const [newToDo, setNewToDo] = useState("");
+  const [toDoList, setToDoList] = useState([{title: "Sample Entry"}]);
 
-function Form(){
-// const [toDo, dispatch] = useReducer(reducer, [])
-const [newToDo, setNewToDo] = useState("")
-const [toDoList, setToDoList] = useState(initialState)
-
-// function reducer(state, action){
-// console.log(action)
-// }
-
-//dispatch("Add")
-// dispatch({type: "Add", payload: "Complete Per Scholas"})
-
-function handleToDoAdd(e){
-e.preventDefault();
-const item = e.target[0].value
-setNewToDo(item)
-const list = []
-
-setToDoList((i) => {console.log(i)})
-console.log(e.target[0].value)
+function handleNewEntry(e){
+    const item = e.target.value !== "" ? e.target.value : null
+    setNewToDo({title: item})
+    console.log("new entry is",item)
 }
-console.log(toDoList)
-return(
-<>
-<form onSubmit = {handleToDoAdd}>
-<input type = "text" placeholder="Enter a task"></input>
-<button>Submit</button>
-</form>
-<ToDoList list = {toDoList}/>
-</>)
+  function handleToDoAdd(e) {
+    e.preventDefault();
+    console.log("In handleToDoAdd list:", newToDo)
+    //const item = e.target[0].value;
+    setToDoList(e => [...e, newToDo]);
+    //console.log(item);
+  }
+
+  console.log(toDoList);
+
+  return (
+    <>
+      <form onSubmit={handleToDoAdd}>
+        <input type="text" placeholder="Enter a task" onChange = {handleNewEntry}></input>
+        <button>Submit</button>
+      </form>
+      {toDoList.length > 0 ? <ToDoList list={toDoList} setList = {setToDoList} /> : ''}
+    </>
+  );
 }
 
-export default Form
+export default Form;
+
+
+  // function reducer(state, action){
+  // console.log(action)
+  // }
+
+  //dispatch("Add")
+  // dispatch({type: "Add", payload: "Complete Per Scholas"})
