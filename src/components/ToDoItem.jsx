@@ -5,6 +5,7 @@ function ToDoItem({task, list, setList}){
 //console.log(task)
 const [showDelete, setShowDelete] = useState(false)
 const [edit, setEdit] = useState(false)
+const [editVal, setEditVal] = useState("")
 const [toDo, dispatch] = useReducer(reducer, list)
 
 function reducer(state, action){
@@ -13,14 +14,20 @@ function reducer(state, action){
     // console.log(action)
     switch(action?.type){
         case "delete":
-            console.log("state in delete",action.payload)
-            const state = list.filter(e => e.title != action.payload)
-            console.log("newList:",state)
+             state = list.filter(e => e.title != action.payload)
             setList(state)
             return
-            //removeEntry(findDeleteEntryIndex)
         case "edit":
-            console.log("state in edit", state)
+            console.log("Payload", action.payload)
+             state = list.map(entry => {
+                if(entry.title == action.payload){
+                    console.log("editVal: ", editVal)
+                    entry.title = editVal
+                }
+                return entry
+            })
+            console.log("new list", state)
+            setList(state)
             return
         default:
             console.log("Invalid action type, try again.")
@@ -38,22 +45,24 @@ function handleDeleteBtnShow(){
 setShowDelete(!showDelete)
 }
 
-function handleDelete(e){
+function handleDelete(){
 dispatch({type:"delete", payload: task})
-
 }
 
 function handleEdit(e){
-console.log(e)
-dispatch({type:"edit", payload: e.target})
-// console.log("The result: ", result)
-// setList(result)
+setEdit(!edit)
+dispatch({type:"edit", payload: task})
+}
+function handleEditChange(e){
+   setEditVal(e.target.value)
+   console.log("New value", e.target.value)
+  // setList(entry => {[...entry]})
 }
 
 return(
 <div id = "to-do-item">
 <input type = "checkbox" onClick={handleDeleteBtnShow}></input>
-{!edit ? <p>{task}</p>: <input type = "text" placeholder = {task}></input>}
+{!edit ? <p>{task}</p>: <input type = "text" placeholder = {task} defaultValue = {task} onChange = {handleEditChange}></input>}
 <button onClick = {handleEdit} disabled = {false && edit}>{edit ? 'Save': 'Edit'}</button>
 <button disabled = {!showDelete} onClick ={handleDelete}>Delete</button>
 </div>)
