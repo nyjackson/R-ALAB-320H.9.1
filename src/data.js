@@ -119,8 +119,6 @@ const initialState = [{
     "title": "ullam nobis libero sapiente ad optio sint",
     "completed": true
   }];
-
-
     let result;
     try{
     const connection = await fetch("https://jsonplaceholder.typicode.com/todos/")
