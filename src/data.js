@@ -1,8 +1,5 @@
 // sample to do data
-
-
-const initialState = [
-  {
+const initialState = [{
     "userId": 1,
     "id": 1,
     "title": "delectus aut autem",
@@ -121,7 +118,21 @@ const initialState = [
     "id": 20,
     "title": "ullam nobis libero sapiente ad optio sint",
     "completed": true
-  }
-];
+  }];
 
-export default initialState
+
+    let result;
+    try{
+    const connection = await fetch("https://jsonplaceholder.typicode.com/todos/")
+    const response = await connection.json()
+    result = response.splice(0,10)
+    }
+    catch(e){
+      console.log(e)
+      result = initialState
+    }
+    
+
+
+export default result
+

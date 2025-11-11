@@ -6,8 +6,8 @@ function ToDoListItem({ toDo, dispatch }) {
   const editRef = useRef();
 
   function handleEdit(e) {
-    console.log(e.target.textContent);
-    console.log("Edit Ref:", editRef.current);
+    // console.log(e.target.textContent);
+    // console.log("Edit Ref:", editRef.current);
     const action = e.target.textContent;
     if (action == "Save") {
       console.log("Saving change...");
@@ -24,7 +24,7 @@ function ToDoListItem({ toDo, dispatch }) {
   }
 
   return (
-    <li>
+    <li id="to-do-item">
       <input type="checkbox" onClick={handleDeleteBtn}></input>
       {showEdit ? (
         <input type="text" ref={editRef} defaultValue={toDo.title}></input>
